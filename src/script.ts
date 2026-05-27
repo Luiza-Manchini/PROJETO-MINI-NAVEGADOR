@@ -53,11 +53,11 @@ const listaFavoritos = document.getElementById("listaFavoritos") as HTMLUListEle
 
 let paginaAtual: string = "https://www.example.com"; // variavel que guarda a pagina que esta aberta no momento
 
-const historico: string[] = [];  //onde vai guardar cada URL que sera acessada
+const historico: string[] = [];  //onde vai guardar cada URL que será acessada
 
-const pilhaVoltar = new Pilha<string>(); //essa e a pilha para controlar o botao de voltar , guarda as paginas anteriores
+const pilhaVoltar = new Pilha<string>(); //essa é a pilha para controlar o botão de voltar , guarda as paginas anteriores
 
-const pilhaAvancar = new Pilha<string>();   // pilha que controla o avancar
+const pilhaAvancar = new Pilha<string>();   // pilha que controla o avançar
 
 const favoritos: string [] = []; //cria a lista dos favoritos
 
@@ -67,11 +67,11 @@ const favoritos: string [] = []; //cria a lista dos favoritos
 
 
 
-//FUNCAO NORMALIZAR A URL
+//FUNÇAO NORMALIZAR A URL
 
 
 function normalizarUrl(url:string): string {///recebe e devolver a URL em formato de texto
-    let urlTratada: string = url.trim();  //remove os espacos
+    let urlTratada: string = url.trim();  //remove os espaços
 
     if (urlTratada === "") {  //verifica e devolve se estiver vazio
         return "";
@@ -84,13 +84,13 @@ function normalizarUrl(url:string): string {///recebe e devolver a URL em format
     return urlTratada
 }
 
-// FUNCAO NAVEGAR PARA
+// FUNÇÃO NAVEGAR PARA
 
 function navegarPara(url:string): void {  //recebe url como texto
     const urlTratada: string = normalizarUrl(url); // se digitou faltando http, ele transforma
 
     if (urlTratada === "") {
-        alert("Digite uma URL valida.");   //verifica se esta vazia e cria o alerta
+        alert("Digite uma URL válida.");   //verifica se está vazia e cria o alerta
         return;
     }
 
@@ -117,10 +117,10 @@ function navegarPara(url:string): void {  //recebe url como texto
 function atualizarHistorico(): void {    //atualiza a tela
     listaHistorico.innerHTML = "";     //evita que os itens fiquem duplicados toda vez que atualizar.
 
-    historico.forEach(function(url:string): void {  //para cada o URL no historico, a funcao executa um bloco
+    historico.forEach(function(url:string): void {  //para cada o URL no historico, a funçao executa um bloco
         const item = document.createElement("li");   //criando li pelo JS
 
-        const textoUrl = document.createElement("span");    //apos criar o elemento do historico, ele cria o botao para excluir
+        const textoUrl = document.createElement("span");    //apos criar o elemento do historico, ele cria o botão para excluir
         textoUrl.textContent = url;
 
         textoUrl.addEventListener("click", function(): void {   // quando clicar na URL...navega ate a URL
@@ -152,7 +152,7 @@ function removerHistorico(url: string): void {
     return;
   }
 
-  historico.splice(indice, 1);    //REMOVE UM ITEM DO HISTORICO COMECANDO NA POSICAO ENCONTRADA
+  historico.splice(indice, 1);    //REMOVE UM ITEM DO HISTORICO COMEÇANDO NA POSIÇÃO ENCONTRADA
 
   salvarDados();
 
@@ -160,11 +160,11 @@ function removerHistorico(url: string): void {
 }
 
 
-//FUNCAO DE VOLTAR A PAGINA
+//FUNÇAO DE VOLTAR A PAGINA
 
-function voltarPagina(): void {   //funcao voltar a pagina
+function voltarPagina(): void {   //funçao voltar a pagina
   if (pilhaVoltar.estaVazia()) {     //a pilha esta vazia?
-    alert("Nao ha pagina anterior.");   //alerta
+    alert("Não há página anterior.");   //alerta
     return;
   }
 
@@ -172,11 +172,11 @@ function voltarPagina(): void {   //funcao voltar a pagina
 
   const paginaAnterior: string | undefined = pilhaVoltar.desempilhar();  //tira a ultima pagina da pilha
 
-  if (paginaAnterior === undefined) {   //verificacao
+  if (paginaAnterior === undefined) {   //verificação
     return;
   }
 
-  paginaAtual = paginaAnterior;   //pagina atual passara a ser a anterior
+  paginaAtual = paginaAnterior;   //pagina atual passará a ser a anterior
 
   iframeNavegador.src = paginaAtual;   //iframe carrega anterior
 
@@ -188,11 +188,11 @@ function voltarPagina(): void {   //funcao voltar a pagina
 }
 
 
-//FUNCAO AVANCAR PAGINA
+//FUNÇAO AVANÇAR PAGINA
 
 function avancarPagina(): void {
     if (pilhaAvancar.estaVazia()) {
-        alert("Nao ha pagina para avancar.");
+        alert("Não há página para avançar.");
         return;
     }
 
@@ -215,7 +215,7 @@ function avancarPagina(): void {
     atualizarHistorico();
 }
 
-//FUNCAO ATUALIZAR FAVORITOS + BOTAO excluir
+//FUNÇAO ATUALIZAR FAVORITOS + BOTAO excluir
 
 function atualizarFavoritos(): void {
   listaFavoritos.innerHTML = "";
@@ -244,7 +244,7 @@ function atualizarFavoritos(): void {
   });
 }
 
-//FUNCAO EXLCUIR FAVORITOS
+//FUNÇAO EXLCUIR FAVORITOS
 
 function removerFavorito(url:string): void {
     const indice:number = favoritos.indexOf(url);
@@ -261,11 +261,11 @@ function removerFavorito(url:string): void {
 
 }
 
-// FUNCAO FAVORITAR PAGINA
+// FUNÇAO FAVORITAR PAGINA
 
 function favoritarPagina(): void {     //pergunt se a pagina atual ja existe nos favoritos, com o metodo inludes
     if(favoritos.includes(paginaAtual)) {
-        alert("Essa pagina ja esta nos favoritos");
+        alert("Essa página já está nos favoritos");
         return;
     }
 
@@ -276,14 +276,14 @@ function favoritarPagina(): void {     //pergunt se a pagina atual ja existe nos
     atualizarFavoritos();
 }
 
-//FUNCAO SALVAR DADOS
+//FUNÇAO SALVAR DADOS
 
  function salvarDados(): void {
     localStorage.setItem("historico", JSON.stringify(historico));   //salva a info no navegador e transf. o array em texto
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
  }
 
-// FUNCAO CARREGAR DADOS
+// FUNÇAO CARREGAR DADOS
 
 function carregarDados(): void {
     const historicoSalvo: string | null = localStorage.getItem("historico");  //busca no navegador o historico salvo
@@ -304,27 +304,27 @@ function carregarDados(): void {
 
 
 
-// BOTAO IR
+// BOTÃO IR
 
-btnIr.addEventListener("click", function(): void {    //vai exectar a funcao quando o botao for clicado
-    navegarPara(inputUrl.value);   //pega o dado input e manda para a funcao
+btnIr.addEventListener("click", function(): void {    //vai exectar a função quando o botão for clicado
+    navegarPara(inputUrl.value);   //pega o dado input e manda para a função
 });
 
 
-// BOTAO VOLTAR
+// BOTÃO VOLTAR
 
 btnVoltar.addEventListener("click", function (): void {
     voltarPagina();            //verifica a pilha e pega a pagina anterior e carrega no iframe
 });
 
-// BOTAO FAVORITAR
+// BOTÃO FAVORITAR
 
 bntFavoritar.addEventListener("click", function(): void {   //pega a pagina atual e salva no array de favoritos
     favoritarPagina();
 });
 
 
-//BOTAO AVANCAR
+//BOTAO AVANÇAR
 
 btnAvancar.addEventListener("click", function (): void {
   avancarPagina();

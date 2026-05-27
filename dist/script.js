@@ -28,13 +28,13 @@ const bntFavoritar = document.getElementById("btnFavoritar");
 const listaFavoritos = document.getElementById("listaFavoritos");
 //VARIAVEIS PRINCIPAIS
 let paginaAtual = "https://www.example.com"; // variavel que guarda a pagina que esta aberta no momento
-const historico = []; //onde vai guardar cada URL que sera acessada
-const pilhaVoltar = new Pilha(); //essa e a pilha para controlar o botao de voltar , guarda as paginas anteriores
-const pilhaAvancar = new Pilha(); // pilha que controla o avancar
+const historico = []; //onde vai guardar cada URL que será acessada
+const pilhaVoltar = new Pilha(); //essa é a pilha para controlar o botão de voltar , guarda as paginas anteriores
+const pilhaAvancar = new Pilha(); // pilha que controla o avançar
 const favoritos = []; //cria a lista dos favoritos
-//FUNCAO NORMALIZAR A URL
+//FUNÇAO NORMALIZAR A URL
 function normalizarUrl(url) {
-    let urlTratada = url.trim(); //remove os espacos
+    let urlTratada = url.trim(); //remove os espaços
     if (urlTratada === "") { //verifica e devolve se estiver vazio
         return "";
     }
@@ -43,11 +43,11 @@ function normalizarUrl(url) {
     }
     return urlTratada;
 }
-// FUNCAO NAVEGAR PARA
+// FUNÇÃO NAVEGAR PARA
 function navegarPara(url) {
     const urlTratada = normalizarUrl(url); // se digitou faltando http, ele transforma
     if (urlTratada === "") {
-        alert("Digite uma URL valida."); //verifica se esta vazia e cria o alerta
+        alert("Digite uma URL válida."); //verifica se está vazia e cria o alerta
         return;
     }
     pilhaVoltar.empilhar(paginaAtual); //antes de trocar, ele guarda a atual na pilha
@@ -64,7 +64,7 @@ function atualizarHistorico() {
     listaHistorico.innerHTML = ""; //evita que os itens fiquem duplicados toda vez que atualizar.
     historico.forEach(function (url) {
         const item = document.createElement("li"); //criando li pelo JS
-        const textoUrl = document.createElement("span"); //apos criar o elemento do historico, ele cria o botao para excluir
+        const textoUrl = document.createElement("span"); //apos criar o elemento do historico, ele cria o botão para excluir
         textoUrl.textContent = url;
         textoUrl.addEventListener("click", function () {
             navegarPara(url);
@@ -85,31 +85,31 @@ function removerHistorico(url) {
     if (indice === -1) {
         return;
     }
-    historico.splice(indice, 1); //REMOVE UM ITEM DO HISTORICO COMECANDO NA POSICAO ENCONTRADA
+    historico.splice(indice, 1); //REMOVE UM ITEM DO HISTORICO COMEÇANDO NA POSIÇÃO ENCONTRADA
     salvarDados();
     atualizarHistorico();
 }
-//FUNCAO DE VOLTAR A PAGINA
+//FUNÇAO DE VOLTAR A PAGINA
 function voltarPagina() {
     if (pilhaVoltar.estaVazia()) { //a pilha esta vazia?
-        alert("Nao ha pagina anterior."); //alerta
+        alert("Não há página anterior."); //alerta
         return;
     }
     pilhaAvancar.empilhar(paginaAtual);
     const paginaAnterior = pilhaVoltar.desempilhar(); //tira a ultima pagina da pilha
-    if (paginaAnterior === undefined) { //verificacao
+    if (paginaAnterior === undefined) { //verificação
         return;
     }
-    paginaAtual = paginaAnterior; //pagina atual passara a ser a anterior
+    paginaAtual = paginaAnterior; //pagina atual passará a ser a anterior
     iframeNavegador.src = paginaAtual; //iframe carrega anterior
     inputUrl.value = paginaAtual; //atualiza o URL
     historico.push(paginaAtual); // adc no historico
     atualizarHistorico();
 }
-//FUNCAO AVANCAR PAGINA
+//FUNÇAO AVANÇAR PAGINA
 function avancarPagina() {
     if (pilhaAvancar.estaVazia()) {
-        alert("Nao ha pagina para avancar.");
+        alert("Não há página para avançar.");
         return;
     }
     pilhaVoltar.empilhar(paginaAtual); //guardo a pg atual na pilha de voltar
@@ -123,7 +123,7 @@ function avancarPagina() {
     historico.push(paginaAtual);
     atualizarHistorico();
 }
-//FUNCAO ATUALIZAR FAVORITOS + BOTAO excluir
+//FUNÇAO ATUALIZAR FAVORITOS + BOTAO excluir
 function atualizarFavoritos() {
     listaFavoritos.innerHTML = "";
     favoritos.forEach(function (url) {
@@ -143,7 +143,7 @@ function atualizarFavoritos() {
         listaFavoritos.appendChild(item);
     });
 }
-//FUNCAO EXLCUIR FAVORITOS
+//FUNÇAO EXLCUIR FAVORITOS
 function removerFavorito(url) {
     const indice = favoritos.indexOf(url);
     if (indice === -1) {
@@ -153,22 +153,22 @@ function removerFavorito(url) {
     salvarDados();
     atualizarFavoritos();
 }
-// FUNCAO FAVORITAR PAGINA
+// FUNÇAO FAVORITAR PAGINA
 function favoritarPagina() {
     if (favoritos.includes(paginaAtual)) {
-        alert("Essa pagina ja esta nos favoritos");
+        alert("Essa página já está nos favoritos");
         return;
     }
     favoritos.push(paginaAtual);
     salvarDados();
     atualizarFavoritos();
 }
-//FUNCAO SALVAR DADOS
+//FUNÇAO SALVAR DADOS
 function salvarDados() {
     localStorage.setItem("historico", JSON.stringify(historico)); //salva a info no navegador e transf. o array em texto
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
 }
-// FUNCAO CARREGAR DADOS
+// FUNÇAO CARREGAR DADOS
 function carregarDados() {
     const historicoSalvo = localStorage.getItem("historico"); //busca no navegador o historico salvo
     const favoritosSalvos = localStorage.getItem("favoritos");
@@ -181,19 +181,19 @@ function carregarDados() {
     atualizarHistorico();
     atualizarFavoritos();
 }
-// BOTAO IR
+// BOTÃO IR
 btnIr.addEventListener("click", function () {
-    navegarPara(inputUrl.value); //pega o dado input e manda para a funcao
+    navegarPara(inputUrl.value); //pega o dado input e manda para a função
 });
-// BOTAO VOLTAR
+// BOTÃO VOLTAR
 btnVoltar.addEventListener("click", function () {
     voltarPagina(); //verifica a pilha e pega a pagina anterior e carrega no iframe
 });
-// BOTAO FAVORITAR
+// BOTÃO FAVORITAR
 bntFavoritar.addEventListener("click", function () {
     favoritarPagina();
 });
-//BOTAO AVANCAR
+//BOTAO AVANÇAR
 btnAvancar.addEventListener("click", function () {
     avancarPagina();
 });
