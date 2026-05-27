@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navegador Web - PROJ.ED.5</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="container">
+    <h1>Mini Navegador</h1>
+
+    <section class="barra-navegacao">
+      <input
+        type="text"
+        id="inputUrl"
+        placeholder="Digite uma URL. Ex: https://www.example.com"
+      >
+
+      <button id="btnIr">Ir</button>
+      <button id="btnVoltar">Voltar</button>
+      <button id="btnAvancar">Avancar</button>
+      <button id="btnFavoritar">Favoritar</button>
+    </section>
+
+    <iframe id="iframeNavegador" src="https://www.example.com"></iframe>
+
+    <section class="painel">
+      <div>
+        <h2>Historico</h2>
+        <ul id="listaHistorico"></ul>
+      </div>
+
+      <div>
+        <h2>Favoritos</h2>
+        <ul id="listaFavoritos"></ul>
+      </div>
+    </section>
+  </main>
+<script src="./dist/script.js"></script>
+
+</body>
+</html>
