@@ -27,6 +27,13 @@ Projeto web simples desenvolvido com HTML, CSS e TypeScript para simular um mini
    ```
 3. Abra `index.html` no navegador.
 
+## Deploy
+
+- GitHub Pages: https://luiza-manchini.github.io/PROJETO-MINI-NAVEGADOR/
+- Workflow: `.github/workflows/pages.yml`
+
+Se o link ainda nao abrir, habilite o GitHub Pages em `Settings > Pages` do repositório. O workflow de deploy ja esta configurado.
+
 ## Observacao
 
 Alguns sites podem bloquear exibicao em `iframe` por politicas de seguranca do proprio site.
