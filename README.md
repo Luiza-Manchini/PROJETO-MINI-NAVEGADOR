@@ -32,6 +32,8 @@ Projeto web simples desenvolvido com HTML, CSS e TypeScript para simular um mini
 - GitHub Pages: https://luiza-manchini.github.io/PROJETO-MINI-NAVEGADOR/
 - Workflow: `.github/workflows/pages.yml`
 
+O deploy atualiza automaticamente a cada push na branch `main`.
+
 Se o link ainda nao abrir, habilite o GitHub Pages em `Settings > Pages` do repositório. O workflow de deploy ja esta configurado.
 
 ## Observacao
